@@ -26,10 +26,13 @@ generateAlbum = function (name,image,quote,dst,res) {
           .resize(resSize,resSize)
           .gravity('Center')
           .crop(400,400)
-          .fontSize(24)
+          .gravity('North') // Change for text placement
+          .font('Helvetica',24)
           .stroke('#fff',1)
           .fill('#000')
-          .drawText(0,0,'test')
+          .drawText(0,-10,name)
+          .gravity('South')
+          .drawText(0,10,quote)
           .write(outputFile,function(err) {
             if (err) console.log(err);
             // Send image response
