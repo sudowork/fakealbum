@@ -18,9 +18,9 @@ exports.fakealbum = function(req, res){
         console.log(data);
         // Pass response to generateAlbum and let it handle serving
         generateAlbum(
-          data.name,   // album name
+          data.author,   // album artist
           data.image,  // image url
-          data.quote,  // album quote
+          data.quote,  // album name
           './albumcovers/', // output directory
           res
         );
