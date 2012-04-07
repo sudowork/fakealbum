@@ -26,7 +26,12 @@ generateAlbum = function (name,image,quote,dst,res) {
           .resize(resSize,resSize)
           .gravity('Center')
           .crop(400,400)
-          .write(outputFile,function() {
+          .fontSize(24)
+          .stroke('#fff',1)
+          .fill('#000')
+          .drawText(0,0,'test')
+          .write(outputFile,function(err) {
+            if (err) console.log(err);
             // Send image response
             var imgbin = fs.readFileSync(outputFile);
             res.send(imgbin,{'Content-Type': 'image/jpeg'}, 200);
