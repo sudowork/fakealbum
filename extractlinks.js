@@ -36,14 +36,14 @@ function image(data, callback) {
 }
 
 function quote(data, callback) {
-  var quotematches = data.match(/<dt>([^<]+)<\/dt>/),
-      authormatches = data.match(/<dd class="author">[^<]*<b><a href="\/quotes\/\w+\/">([^<]+)<\/a>/);
+  var quotematches = data.match(/<dt>([^<]+)<\/dt>/);
+      //authormatches = data.match(/<dd class="author">[^<]*<b><a href="\/quotes\/\w+\/">([^<]+)<\/a>/);
   if (quotematches && quotematches.length > 1) {
     callback({ quote : quotematches[1] });
   }
-  if (authormatches && authormatches.length > 1) {
+  /*if (authormatches && authormatches.length > 1) {
     callback({ author : authormatches[1] });
-  }
+  }*/
 }
 
 function title(data, callback) {
@@ -61,10 +61,10 @@ extractLinks = function(url, callback) {
     if (obj) {
       if (obj.image) data.image = obj.image;
       if (obj.quote) data.quote = obj.quote;
-      if (obj.author) data.author = obj.author;
+      //if (obj.author) data.author = obj.author;
       if (obj.title) data.title = obj.title;
 
-      if (data.image && data.quote && data.author && data.title) {
+      if (data.image && data.quote && data.title) {
         callback(data);
       }
     }
