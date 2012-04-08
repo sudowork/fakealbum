@@ -31,7 +31,7 @@ generateAlbum = function (name,image,quote,dst,res) {
   }
 
   // Valid starts
-  var starts = ['JJ','JJS','JJR','VB','NN'];
+  var starts = ['JJ','JJS','JJR','VB'];
   var startind = tags.indexOf(
     starts[Math.floor(Math.random()*starts.length)]);
   if (startind < 0) startind = Math.floor(Math.random()*tags.length);
@@ -42,7 +42,7 @@ generateAlbum = function (name,image,quote,dst,res) {
   }
 
   // Choose font
-  var fonts = ['Belleza-Regular.ttf', 'ChauPhilomeneOne-Regular.ttf', 'DellaRespira-Regular.ttf', 'Dosis-Regular.ttf', 'Helvetica.dfont', 'HelveticaNeue.dfont', 'Karla-Regular.ttf', 'Rosarivo-Regular.ttf', 'Trocchi-Regular.ttf']; 
+  var fonts = ['Belleza-Regular.ttf', 'DellaRespira-Regular.ttf', 'Dosis-Regular.ttf', 'Karla-Regular.ttf', 'Rosarivo-Regular.ttf'];
   var font = fonts[Math.floor(Math.random()*fonts.length)];
 
   // Convert file to jpg using imagemagick
@@ -64,20 +64,51 @@ generateAlbum = function (name,image,quote,dst,res) {
         // Manipulations
         this 
           .resize(resSize,resSize)
+          .enhance()
+          .gravity('Center')
+          .crop(400,400)
+          .font('./fonts/' + font,400/name.length*1.25)
+          .fill('#000')
+          .drawText(0,45,name.toUpperCase(),'South')
+          .fontSize(24)
+          //.drawText(0,13,toTitleCase(albumTitle),'South')
+          .drawText(0,10,albumTitle.toUpperCase(),'South')
+          .write(outputFile,function(err) {
+            if (err) console.log(err);
+            easyimg.exec("convert " + outputFile
+              + " -gravity 'NorthEast' -draw \"image Over 10,10 0,0 './images/parental.jpg'\" "
+              + outputFile,
+              function(err) {
+                // Send image response
+                var imgbin = fs.readFileSync(outputFile);
+                res.send(imgbin,{'Content-Type': 'image/jpeg'}, 200);
+              }
+            );
+          });
+        /*this 
+          .resize(resSize,resSize)
+          .enhance()
           .gravity('Center')
           .crop(400,400)
           .gravity('North') // Change for text placement
           .font('./fonts/' + font,24)
           .fill('#000')
-          .drawText(0,34,name,'North')
+          .drawText(0,34,name.toUpperCase(),'North')
           .fontSize(36)
-          .drawText(0,13,toTitleCase(albumTitle),'South')
+          //.drawText(0,13,toTitleCase(albumTitle),'South')
+          .drawText(0,13,albumTitle.toUpperCase(),'South')
           .write(outputFile,function(err) {
             if (err) console.log(err);
-            // Send image response
-            var imgbin = fs.readFileSync(outputFile);
-            res.send(imgbin,{'Content-Type': 'image/jpeg'}, 200);
-          });
+            easyimg.exec("convert " + outputFile
+              + " -gravity 'SouthEast' -draw \"image Over 10,50 0,0 './images/parental.jpg'\" "
+              + outputFile,
+              function(err) {
+                // Send image response
+                var imgbin = fs.readFileSync(outputFile);
+                res.send(imgbin,{'Content-Type': 'image/jpeg'}, 200);
+              }
+            );
+          });*/
       });
     }
   );
