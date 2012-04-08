@@ -78,6 +78,7 @@ generateAlbum = function (name,image,quote,dst,res) {
                     + " -gravity 'NorthEast' -draw \"image Over 10,10 0,0 './images/parental.jpg'\" "
                     + outputFile,
                     function(err) {
+                      if (err) console.log(err);
                       // Send image response
                       var imgbin = fs.readFileSync(outputFile);
                       res.send(imgbin,{'Content-Type': 'image/jpeg'}, 200);
