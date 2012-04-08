@@ -71,7 +71,7 @@ generateAlbum = function (name,image,quote,dst,res) {
           .fill('#000')
           .drawText(0,34,name,'North')
           .fontSize(36)
-          .drawText(0,10,toTitleCase(albumTitle),'South')
+          .drawText(0,13,toTitleCase(albumTitle),'South')
           .write(outputFile,function(err) {
             if (err) console.log(err);
             // Send image response
