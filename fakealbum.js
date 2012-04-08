@@ -65,7 +65,7 @@ generateAlbum = function (name,image,quote,dst,res) {
           .write(outputFile,
             function() {
               // Get best row
-              getBestRow(outputFile, function(row,color) {
+              getBestRow(outputFile, function(row,color,stroke) {
                 gm(outputFile)
                 .font('./fonts/' + font,400/name.length*1.25)
                 .fill(color)

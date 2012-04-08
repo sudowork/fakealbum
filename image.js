@@ -196,8 +196,13 @@ module.exports = function(path,callback) {
     lightness /= (range * width);
     saturation /= (range * width);
 
+    /*var cband = .4;
+    if (lightness >= .5-cband && lightness <= .5) lightness = .5-cband;
+    if (lightness > .5 && lightness <= .5+cband) lightness = .5+cband;*/
     idealColor = hslToRgb((hue+0.5)%1, saturation, 1-lightness);
-    callback(minindex,rgbToHex(idealColor.r,idealColor.g,idealColor.b));
+    strokeColor = hslToRgb((hue+0.5)%1, saturation, Math.max(0,1-lightness-0.2));
+    console.log(idealColor);
+    callback(minindex,rgbToHex(idealColor.r,idealColor.g,idealColor.b),rgbToHex(strokeColor.r,strokeColor.g,strokeColor.b));
   };
 
   img.src = path;
