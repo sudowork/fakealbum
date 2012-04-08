@@ -41,6 +41,10 @@ generateAlbum = function (name,image,quote,dst,res) {
     else if (tags[i] == "NN") albumTitle += " " + taggedWords[i][0];
   }
 
+  // Choose font
+  var fonts = ['Belleza-Regular.ttf', 'ChauPhilomeneOne-Regular.ttf', 'DellaRespira-Regular.ttf', 'Dosis-Regular.ttf', 'Helvetica.dfont', 'HelveticaNeue.dfont', 'Karla-Regular.ttf', 'Rosarivo-Regular.ttf', 'Trocchi-Regular.ttf']; 
+  var font = fonts[Math.floor(Math.random()*fonts.length)];
+
   // Convert file to jpg using imagemagick
   easyimg.convert(
     {
@@ -63,9 +67,10 @@ generateAlbum = function (name,image,quote,dst,res) {
           .gravity('Center')
           .crop(400,400)
           .gravity('North') // Change for text placement
-          .font('./fonts/Karla-Regular.ttf',24)
+          .font('./fonts/' + font,24)
           .fill('#000')
           .drawText(0,34,name,'North')
+          .fontSize(36)
           .drawText(0,10,toTitleCase(albumTitle),'South')
           .write(outputFile,function(err) {
             if (err) console.log(err);
