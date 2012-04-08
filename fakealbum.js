@@ -1,9 +1,45 @@
-gm = require('gm');
-easyimg = require('easyimage');
-fs = require('fs');
+var gm = require('gm'),
+easyimg = require('easyimage'),
+fs = require('fs'),
+Lexer = require('./lib/lexer'),
+POSTagger = require('./lib/POSTagger');
+
+function toTitleCase(str)
+{
+  return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+}
 
 generateAlbum = function (name,image,quote,dst,res) {
   var outputFile = dst + Date.now() + '.jpg';
+
+  // Generate album name
+  var words = new Lexer().lex(quote),
+  taggedWords = new POSTagger().tag(words);
+  /*dict = {};
+  for (i in taggedWords) {
+    var tag = taggedWords[i][1];
+    if (!dict[tag]) {
+      dict[tag] = new Array();
+    }
+    dict[tag].push(taggedWords[i][0]);
+  }*/
+
+  // Build tag list
+  var tags = new Array();
+  for (var i in taggedWords) {
+    tags.push(taggedWords[i][1]);
+  }
+
+  // Valid starts
+  var starts = ['JJ','JJS','JJR','VB','NN'];
+  var startind = tags.indexOf(
+    starts[Math.floor(Math.random()*starts.length)]);
+  if (startind < 0) startind = Math.floor(Math.random()*tags.length);
+  var albumTitle = "";
+  for (var i = startind; i < tags.length && i-startind < 5; i++) {
+    if (i == startind) albumTitle += taggedWords[i][0];
+    else if (tags[i] == "NN") albumTitle += " " + taggedWords[i][0];
+  }
 
   // Convert file to jpg using imagemagick
   easyimg.convert(
@@ -27,12 +63,10 @@ generateAlbum = function (name,image,quote,dst,res) {
           .gravity('Center')
           .crop(400,400)
           .gravity('North') // Change for text placement
-          .font('Helvetica',24)
-          .stroke('#fff',1)
+          .font('./fonts/Karla-Regular.ttf',24)
           .fill('#000')
-          .drawText(0,-10,name)
-          .gravity('South')
-          .drawText(0,10,quote)
+          .drawText(0,34,name,'North')
+          .drawText(0,10,toTitleCase(albumTitle),'South')
           .write(outputFile,function(err) {
             if (err) console.log(err);
             // Send image response
