@@ -16,6 +16,10 @@ generateAlbum = function (name,image,quote,dst,res) {
   // Generate album name
   var words = new Lexer().lex(quote),
   taggedWords = new POSTagger().tag(words);
+  for (var i = taggedWords.length - 1; i >= 0; i--) {
+    if (taggedWords[i][0] == ',' || taggedWords[i][0] == '.')
+      delete taggedWords[i];
+  }
   console.log(taggedWords);
 
   // Build tag list
