@@ -163,7 +163,7 @@ module.exports = function(path,callback) {
     // Moving average
     var averages = new Array(height);
     // Range must be odd
-    var range = 101;
+    var range = 111;
     var halfrange = (range-1)/2;
     minavg = 9999999999999,
     minindex = -1;

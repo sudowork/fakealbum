@@ -57,7 +57,7 @@ generateAlbum = function (name,image,quote,dst,res) {
         var resSize = 400/Math.min(value.width,value.height)*Math.max(value.width,value.height);
 
         // Manipulations
-        this 
+        this
           .resize(resSize,resSize)
           .enhance()
           .gravity('Center')
@@ -68,14 +68,15 @@ generateAlbum = function (name,image,quote,dst,res) {
               getBestRow(outputFile, function(row,color,stroke) {
                 gm(outputFile)
                 .font('./fonts/' + font,400/name.length*1.25)
-                .fill(color)
+                .fill(stroke)
                 .drawText(0,row-25,name.toUpperCase(),'North')
                 .fontSize(24)
                 .drawText(0,row,albumTitle.toUpperCase(),'North')
                 .write(outputFile,function(err) {
                   if (err) console.log(err);
+                  var pos = (row > 200) ? '10,10 0,0' : '10,350 0,0';
                   easyimg.exec("convert " + outputFile
-                    + " -gravity 'NorthEast' -draw \"image Over 10,10 0,0 './images/parental.jpg'\" "
+                    + " -gravity 'NorthEast' -draw \"image Over "+pos+" './images/parental.jpg'\" "
                     + outputFile,
                     function(err) {
                       if (err) console.log(err);
