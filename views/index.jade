@@ -1,2 +1,19 @@
 h1= title
-p Welcome to #{title}
+
+p This fake album generator was created for the Interview Street Campus Collaborative Challenge. Unfortunately the version that was submitted for judging was 5 hours old. There was a broken dependency on this particular platform (libjpegv8) that prevented one of our node-canvas module from behaving correctly. The version you see here, however, is updated to what was meant to be submitted to the contest.
+
+p Examples
+    ul
+      li
+        a(href="/fakealbum?name=http://en.wikipedia.org/wiki/Alakamisy&image=http://www.flickr.com/photos/weedobooty/7031679837/&quote=http://www.quotationspage.com/quote/1096.html") Example 1
+      li
+        a(href="/fakealbum?name=http://en.wikipedia.org/wiki/Storm_King_Highway&image=http://www.flickr.com/photos/nikifeijen/7038953389/&quote=http://www.quotationspage.com/quote/23572.html") Example 2
+      li
+        a(href="/fakealbum?name=http://en.wikipedia.org/wiki/Jewish_cuisine&image=http://www.flickr.com/photos/patrick_castelli/7050134201/&quote=http://www.quotationspage.com/quote/748.html") Example 3
+      li
+        a(href="/fakealbum?name=http://en.wikipedia.org/wiki/Arab_Media_Forum&image=http://www.flickr.com/photos/leuni/7038775987/&quote=http://www.quotationspage.com/quote/2713.html") Example 4
+      li
+        a(href="/fakealbum?name=http://en.wikipedia.org/wiki/1823_in_birding_and_ornithology&image=http://www.flickr.com/photos/relle/7041371547/&quote=http://www.quotationspage.com/quote/1474.html") Example 5
+
+p The format for generating an album cover is:
+  pre= "<ec2url>/fakealbum?name=<wikipedia.url>&image=<flickr.url>&quote=<quote.url>"
