@@ -11,14 +11,14 @@ function toTitleCase(str)
 }
 
 generateAlbum = function (name,image,quote,dst,res) {
-  var outputFile = dst + Date.now() + '.jpg';
+  var outputFile = dst + Date.now() + '.png';
 
   // Generate album name
   var words = new Lexer().lex(quote),
   taggedWords = new POSTagger().tag(words);
   for (var i = taggedWords.length - 1; i >= 0; i--) {
     if (taggedWords[i][0] == ',' || taggedWords[i][0] == '.')
-      delete taggedWords[i];
+      taggedWords.splice(i,1);
   }
   console.log(taggedWords);
 
