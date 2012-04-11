@@ -86,7 +86,7 @@ generateAlbum = function (name,image,quote,dst,res) {
                       if (err) console.log(err);
                       // Send image response
                       var imgbin = fs.readFileSync(outputFile);
-                      res.send(imgbin,{'Content-Type': 'image/jpeg'}, 200);
+                      res.send(imgbin,{'Content-Type': 'image/png'}, 200);
                     }
                   );
                 });
