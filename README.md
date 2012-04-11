@@ -31,7 +31,7 @@ Main Collaborators
 ==================
 
 * Kevin Gao (sudowork)
-* Yang Su (suyang1)
+* Yang Su (yangsu)
 * Kelvin Gu
 
 Future
