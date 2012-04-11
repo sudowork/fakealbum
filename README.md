@@ -9,13 +9,13 @@ Dependencies
 * ImageMagick
 * GraphicsMagick
 * `node`
-	* npm
-	* express
-	* jade
-	* easyimage
-	* gm
-	* canvas
-	* supervisor (optional)
+	* `npm`
+	* `express`
+	* `jade`
+	* `easyimage`
+	* `gm`
+	* `canvas`
+	* `supervisor` (optional)
 
 Deploying
 =========
@@ -23,9 +23,12 @@ Deploying
 First make sure that the dependencies are installed prior to deployment.
 
 Run the following commands to deploy after cloning the repository and setting it to the working directory:
-	mkdir albumcovers
-	npm install -d
-	sudo supervisor app.js
+
+```shell
+mkdir albumcovers
+npm install -d
+sudo supervisor app.js
+```
 
 Main Collaborators
 ==================
